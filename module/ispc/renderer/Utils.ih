@@ -1,0 +1,30 @@
+#include <ospray/SDK/math/random.ih>
+#include <ospray/SDK/math/vec.ih>
+#include <ospray/SDK/render/Renderer.ih>
+
+/**
+    Composes source and destination colors according to specified alpha
+   correction
+    @param src Source RGBA color
+    @param dst Returned destination RGBA color
+    @param alphaCorrection Alpha correction used to blend colors
+*/
+void composite(const varying vec4f& src, varying vec4f& dst,
+               const varying float alphaCorrection);
+
+float sign(const float v);
+
+vec3f sign(const vec3f& v);
+
+vec3f mod(const vec3f& v, const int m);
+
+vec3f mod(const vec3f& v, const vec3f& u);
+
+float smoothstep(const float edge0, const float edge1, float x);
+
+float mix(const float x, const float y, const float a);
+
+float getRandomValue(varying ScreenSample&, const int);
+
+vec3f getRandomVector(const unsigned int, varying ScreenSample& sample,
+                      const vec3f& normal, const int randomNumber);
