@@ -144,11 +144,11 @@ inline varying vec4f getVoxelColor(const uniform FractalsRenderer* uniform self,
     }
 
 #if 1
-    const float v = 2.f * (float)voxelValue / (float)self->maxIterations;
+    const float v = 5.f * (float)voxelValue / (float)self->maxIterations;
     const float a =
         (v >= self->minShadingThreshold && v < self->maxShadingThreshold) ? 0.1f
                                                                           : 0.f;
-    return make_vec4f(v, 1.f, 1.f - v, a);
+    return make_vec4f(0.5f + v * 0.5f, v, 1.f - v * 0.5f, a);
 #else
     const float normalizedValue =
         clamp(((float)voxelValue - self->colorMapMinValue) /
