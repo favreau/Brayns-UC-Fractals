@@ -25,9 +25,9 @@
 
 #include <brayns/common/ActionInterface.h>
 #include <brayns/common/PropertyMap.h>
-#include <brayns/engine/Engine.h>
+#include <brayns/engineapi/Engine.h>
 #include <brayns/parameters/ParametersManager.h>
-#include <brayns/pluginapi/PluginAPI.h>
+#include <brayns/pluginapi/Plugin.h>
 
 template <typename EnumT>
 inline std::vector<std::pair<std::string, FractalType>> enumMap()
