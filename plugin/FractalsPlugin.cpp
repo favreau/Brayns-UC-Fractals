@@ -55,8 +55,11 @@ void _addFractalsRenderer(brayns::Engine &engine)
     properties.setProperty({"param2", 0.27015, -10., 10., {"Parameter 2"}});
     properties.setProperty({"shadows", 0., 0., 1., {"Shadow intensity"}});
     properties.setProperty({"softShadows", 0., 0., 1., {"Shadow softness"}});
-    properties.setProperty(
-        {"minShadingThreshold", 0., 0.01, 1., {"Transparency min threshold"}});
+    properties.setProperty({"minShadingThreshold",
+                            0.01,
+                            0.01,
+                            1.,
+                            {"Transparency min threshold"}});
     properties.setProperty(
         {"maxShadingThreshold", 1., 0.01, 1., {"Transparency max threshold"}});
     properties.setProperty({"maxIterations",
@@ -70,6 +73,7 @@ void _addFractalsRenderer(brayns::Engine &engine)
                             int32_t(FractalType::julia),
                             enumNames<FractalType>(),
                             {"Type of fractal"}});
+    properties.setProperty({"exposure", 1., 0.01, 10., {"Exposure"}});
 
     engine.addRendererType("fractals", properties);
 }

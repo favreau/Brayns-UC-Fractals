@@ -42,6 +42,7 @@ struct FractalsRenderer
     float param1;
     float param2;
     int randomNumber;
+    float exposure;
 
     // Transfer function / Color map attributes
     uniform vec4f* uniform colorMap;
@@ -218,7 +219,7 @@ inline vec3f FractalsRenderer_shadeRay(
         vec4f voxelColor = getVoxelColor(self, point);
 
         // Shadow
-        if (self->shadows > 0.f && voxelColor.w > 0.f)
+        if (sample.sampleID.z > 0 && self->shadows > 0.f && voxelColor.w > 0.f)
         {
             const float alpha =
                 1.f - self->shadows *
@@ -240,7 +241,8 @@ inline vec3f FractalsRenderer_shadeRay(
     sample.alpha = pathOpacity;
     sample.z = t0;
 
-    return make_vec3f(pathColor);
+    return clamp(self->exposure * make_vec3f(pathColor), make_vec3f(0.f),
+                 make_vec3f(1.f));
 }
 
 void FractalsRenderer_renderSample(uniform Renderer* uniform _self,
@@ -273,7 +275,7 @@ export void FractalsRenderer_set(
     uniform vec4f* uniform colormap,
     uniform vec3f* uniform emissionIntensitiesMap,
     const uniform int32 colorMapSize, const uniform float& colorMapMinValue,
-    const uniform float& colorMapRange)
+    const uniform float& colorMapRange, const uniform float& exposure)
 {
     uniform FractalsRenderer* uniform self =
         (uniform FractalsRenderer * uniform) _self;
@@ -288,6 +290,7 @@ export void FractalsRenderer_set(
     self->param1 = param1;
     self->param2 = param2;
     self->fractalType = fractalType;
+    self->exposure = exposure;
 
     self->lights = (const uniform Light* uniform* uniform)lights;
     self->numLights = numLights;

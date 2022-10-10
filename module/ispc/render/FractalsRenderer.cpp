@@ -56,6 +56,7 @@ void FractalsRenderer::commit()
     _param2 = getParam1f("param2", 0.f);
     _maxIterations = getParam1i("maxIterations", 0);
     _fractalType = static_cast<FractalType>(getParam1i("fractalType", 0));
+    _exposure = getParam1f("exposure", 1.f);
 
     // Transfer function
     _transferFunctionDiffuseData = getParamData("transferFunctionDiffuseData");
@@ -80,7 +81,7 @@ void FractalsRenderer::commit()
             ? (ispc::vec3f*)_transferFunctionEmissionData->data
             : NULL,
         _transferFunctionSize, _transferFunctionMinValue,
-        _transferFunctionRange);
+        _transferFunctionRange, _exposure);
 }
 
 FractalsRenderer::FractalsRenderer()

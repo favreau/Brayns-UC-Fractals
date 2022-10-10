@@ -60,6 +60,7 @@ private:
     float _param1;
     float _param2;
     FractalType _fractalType;
+    float _exposure;
 
     // Transfer function
     ospray::Ref<ospray::Data> _transferFunctionDiffuseData;
